@@ -94,7 +94,104 @@ The example app demonstrates:
 - ✏️ **Drawing Tools** - Full-featured drawing interface with tool selection
 - 📱 **Responsive Design** - Adapts to different screen sizes and orientations
 
-## 📊 Component Properties
+## � TypeScript Support
+
+This library includes comprehensive TypeScript type definitions. TypeScript users get full IntelliSense support and type safety.
+
+### Basic TypeScript Usage
+
+```tsx
+import React, { useRef } from 'react';
+import { View, StyleSheet } from 'react-native';
+import RNKLineView, { 
+  OptionListData, 
+  KLineDataItem,
+  RNKLineViewProps 
+} from 'react-native-kline-view';
+
+const MyChart: React.FC = () => {
+  const klineRef = useRef<RNKLineView>(null);
+
+  // Type-safe K-line data
+  const klineData: KLineDataItem[] = [
+    {
+      id: 1640000000000,
+      time: 1640000000000,
+      open: 50000,
+      high: 51000,
+      low: 49500,
+      close: 50500,
+      vol: 1234,
+      volume: 1234,
+    },
+    // ... more data
+  ];
+
+  // Type-safe option configuration
+  const optionList: OptionListData = {
+    modelArray: klineData,
+    shouldScrollToEnd: true,
+    price: 2,
+    volume: 0,
+    primary: 1, // MA indicator
+    second: 3,  // MACD indicator
+    configList: {
+      colorList: {
+        increaseColor: processColor('#00C087'),
+        decreaseColor: processColor('#FF3B69'),
+      },
+      backgroundColor: processColor('#1a1a1a'),
+      textColor: processColor('#ffffff'),
+      gridColor: processColor('#2a2a2a'),
+      // ... more configuration
+    },
+  };
+
+  return (
+    <View style={styles.container}>
+      <RNKLineView
+        ref={klineRef}
+        style={styles.chart}
+        optionList={JSON.stringify(optionList)}
+        onDrawItemDidTouch={(event) => {
+          console.log('Draw touched:', event.nativeEvent);
+        }}
+        onDrawItemComplete={(event) => {
+          console.log('Draw completed:', event.nativeEvent);
+        }}
+        onDrawPointComplete={(event) => {
+          console.log('Points:', event.nativeEvent.pointCount);
+        }}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  chart: { flex: 1 },
+});
+```
+
+### Available Type Definitions
+
+The library exports the following types for full type safety:
+
+- **`RNKLineView`** - Main component class
+- **`RNKLineViewProps`** - Component props interface
+- **`KLineDataItem`** - Individual candle data structure
+- **`OptionListData`** - Complete configuration object
+- **`ConfigList`** - Visual styling configuration
+- **`DrawList`** - Drawing tools configuration
+- **`TargetList`** - Technical indicator parameters
+- **`ColorList`** - Color scheme configuration
+- **`MAItem`** - Moving average item configuration
+- **`DrawEvent`** - Drawing event structure
+- **`DrawPointEvent`** - Drawing point event structure
+
+For complete type definitions, see [index.d.ts](./index.d.ts)
+
+## �📊 Component Properties
 
 ### Core Properties
 
