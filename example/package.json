@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "postinstall": "rm -rf ./node_modules/react-native-kline-view/example"
+    "postinstall": "rimraf ./node_modules/react-native-kline-view/example",
+    "postinstall:linux": "rm -rf ./node_modules/react-native-kline-view/example"
   },
   "dependencies": {
     "react": "19.1.0",
