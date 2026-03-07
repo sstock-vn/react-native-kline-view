@@ -1,13 +1,22 @@
 buildscript {
+    ext.kotlin_version = "1.9.22"
     repositories {
-        jcenter()
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.2.1"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-apply plugin: 'com.android.library'
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
 
 android {
-	compileSdk 35
+    namespace "com.github.fujianlian.klinechart"
+    compileSdk 35
+
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 35
@@ -15,7 +24,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -24,10 +32,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 repositories {
+    google()
     mavenCentral()
 }
 
